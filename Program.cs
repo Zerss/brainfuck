@@ -8,7 +8,7 @@ namespace brainfuck
     {
         ASCIIEncoding Encode;
         Memory Memory;
-        String Code = "+[>[<-[]>+[>+++>[+++++++++++>][>]-[<]>-]]++++++++++<]>>>>>> ----.<< +++.< -..++ +.< -.>>>.<<.++ +.------.> -.<< +.<.";
+        String Code = "";
         Stack<int> Loops;
 
         static void Main(string[] args)
@@ -85,7 +85,7 @@ namespace brainfuck
     {
         public int[] Content;
         public int Size;
-        public int Cursor;
+        int Cursor;
 
         public Memory(int DefaultSize)
         {
