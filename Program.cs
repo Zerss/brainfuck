@@ -8,8 +8,8 @@ namespace brainfuck
     {
         ASCIIEncoding Encode;
         Memory Memory;
-        String Code = "";
-        Stack<int> Loops; // using a LIFO in order to keep every loops beginning index value
+        String Code = "+[>[<-[]>+[>+++>[+++++++++++>][>]-[<]>-]]++++++++++<]>>>>>> ----.<< +++.< -..++ +.< -.>>>.<<.++ +.------.> -.<< +.<.";
+        Stack<int> Loops;
 
         static void Main(string[] args)
             => new Program();
@@ -19,7 +19,7 @@ namespace brainfuck
             Encode = new ASCIIEncoding();
             Memory = new Memory(10);
             Loops = new Stack<int>();
-
+            
             for (int i = 0; i < Code.Length; i++)
             {
                 char c = Code[i];
@@ -46,7 +46,20 @@ namespace brainfuck
                         Console.Write("\b");
                         break;
                     case '[':
-                        Loops.Push(i);
+                        if (Memory.Read() != 0)
+                            Loops.Push(i);
+                        else
+                        {
+                            int LoopCount = 0;
+                            while (Code[i] != ']' || LoopCount > 1)
+                            {
+                                if (Code[i] == '[')
+                                    LoopCount++;
+                                else if (Code[i] == ']')
+                                    LoopCount--;
+                                i++;
+                            }
+                        }
                         break;
                     case ']':
                         int ibeg = Loops.Pop();
@@ -72,7 +85,7 @@ namespace brainfuck
     {
         public int[] Content;
         public int Size;
-        int Cursor;
+        public int Cursor;
 
         public Memory(int DefaultSize)
         {
