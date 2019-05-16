@@ -43,7 +43,7 @@ while index < len( code ):
         memory[mem_index] -= 1
         memory[mem_index] %= 256
     elif ch == '.':
-        print( chr( memory[mem_index] ), end="" )
+        sys.stdout.write( chr( memory[mem_index] ) )
     elif ch == ',':
         memory[mem_index] = ord( input() )
     elif ch == '[':
@@ -58,3 +58,5 @@ while index < len( code ):
         loop_index = loop_indexes.pop()
         if memory[mem_index] != 0: index = loop_index - 1
     index += 1
+
+print()
